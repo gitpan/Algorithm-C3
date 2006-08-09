@@ -6,7 +6,7 @@ use warnings;
 
 use Carp 'confess';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub merge {
     my ($root, $parent_fetcher) = @_;
@@ -54,8 +54,8 @@ sub merge {
             # that was a perl-port of the python code at
             # http://www.python.org/2.3/mro.html :)
 
-            # Initial set
-            my @seqs = ([$current_root], @$recurse_mergeout, $current_parents);
+            # Initial set (make sure everything is copied - it will be modded)
+            my @seqs = map { [@$_] } (@$recurse_mergeout, $current_parents);
 
             # Construct the tail-checking hash
             my %tails;
@@ -63,7 +63,7 @@ sub merge {
                 $tails{$_}++ for (@$seq[1..$#$seq]);
             }
 
-            my @res;
+            my @res = ( $current_root );
             while (1) {
                 my $cand;
                 my $winner;

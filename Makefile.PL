@@ -2,14 +2,14 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
+          'PL_FILES' => {},
+          'INSTALLDIRS' => 'site',
           'NAME' => 'Algorithm::C3',
+          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Algorithm/C3.pm',
           'PREREQ_PM' => {
-                           'Carp' => '0.01',
-                           'Test::More' => '0.47'
-                         },
-          'INSTALLDIRS' => 'site',
-          'EXE_FILES' => [],
-          'PL_FILES' => {}
+                           'Test::More' => '0.47',
+                           'Carp' => '0.01'
+                         }
         )
 ;

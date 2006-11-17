@@ -6,7 +6,7 @@ use warnings;
 
 use Carp 'confess';
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub merge {
     my ($root, $parent_fetcher, $cache) = @_;
@@ -24,10 +24,23 @@ sub merge {
     my $current_parents = [ $root->$parent_fetcher ];
     my $recurse_mergeout = [];
     my $i = 0;
+    my %seen = ( $root => 1 );
 
     while(1) {
         if($i < @$current_parents) {
             my $new_root = $current_parents->[$i++];
+
+            if($seen{$new_root}) {
+                my @isastack = (
+                    (map { $_->[0] } @STACK),
+                    $current_root,
+                    $new_root
+                );
+                shift @isastack while $isastack[0] ne $new_root;
+                my $isastack = join(q{ -> }, @isastack);
+                die "Infinite loop detected in parents of '$root': $isastack";
+            }
+            $seen{$new_root} = 1;
 
             unless ($pfetcher_is_coderef or $new_root->can($parent_fetcher)) {
                 confess "Could not find method $parent_fetcher in $new_root";
@@ -46,6 +59,8 @@ sub merge {
             $i = 0;
             next;
         }
+
+        $seen{$current_root} = 0;
 
         my $mergeout = $cache->{merge}->{$current_root} ||= do {
 

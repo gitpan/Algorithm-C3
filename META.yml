@@ -1,6 +1,6 @@
 ---
 name: Algorithm-C3
-version: 0.06
+version: 0.07
 author:
   - 'Stevan Little, E<lt>stevan@iinteractive.comE<gt>'
   - 'Brandon L. Black, E<lt>blblack@gmail.comE<gt>'
@@ -15,8 +15,8 @@ build_requires:
 provides:
   Algorithm::C3:
     file: lib/Algorithm/C3.pm
-    version: 0.06
-generated_by: Module::Build version 0.2805
+    version: 0.07
+generated_by: Module::Build version 0.2807
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

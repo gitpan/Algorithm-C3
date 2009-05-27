@@ -1,9 +1,7 @@
 Build.PL
 Changes
 lib/Algorithm/C3.pm
-Makefile.PL
-MANIFEST
-META.yml
+MANIFEST			This list of files
 README
 t/000_load.t
 t/001_merge.t
@@ -19,3 +17,4 @@ t/010_complex_merge_classless.t
 t/011_infinite_loop.t
 t/pod.t
 t/pod_coverage.t
+META.yml
